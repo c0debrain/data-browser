@@ -8,8 +8,8 @@ import Checkbox from 'material-ui/Checkbox';
 
 @observer
 class Table extends React.Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {
 
 		}

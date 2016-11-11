@@ -157,6 +157,10 @@ var configObject = {
         type:['List'],
         options:[
           '','containedIn','notContainedIn','containsAll'
+        ],
+        notContains:['File','Object','Relation'],
+        optionsNotContains:[
+          '','exists','doesNotExists'
         ]
       }
 

@@ -11,8 +11,8 @@ import DateTimeList from './listComponents/dateTimeList.js'
 import GenericAddToList from './listComponents/genericAddToList.js'
 
 class ListTdComponent extends React.Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {
 			isModalOpen:false,
 			elementData:[],
