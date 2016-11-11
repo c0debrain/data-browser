@@ -73,6 +73,7 @@ class TableStore {
 	}
 	setColumnsData(){
 		let query = new CB.CloudQuery(this.TABLE)
+		query.setLimit(20);
 		query.find().then((list)=>{
 			this.columnsData = list
 		})
