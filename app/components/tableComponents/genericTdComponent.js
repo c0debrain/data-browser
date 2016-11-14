@@ -34,91 +34,103 @@ class GenericTdComponent extends React.Component {
 	componentWillReceiveProps(props){
 		this.generaliseComponent(props)
 	}
+	shouldComponentUpdate(props,state){
+		//console.log(this.state.elementData != state.elementData)
+		//console.log(this.props.columnData.version,props.columnData.version)
+		//console.log(this.props.tableStore.hiddenColumns.length)
+		//return this.state.elementData != state.elementData
+		return true
+	}
 	generaliseComponent(props){
+		let componentToRender
+		let elementData
 		switch (props.columnType.dataType) {
 			case "Text":
-				this.state.componentToRender =  TextTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  TextTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "Number":
-				this.state.componentToRender =  NumberTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  NumberTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "URL":
-				this.state.componentToRender =  URLTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  URLTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "Boolean":
-				this.state.componentToRender =  BooleanTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  BooleanTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "Email":
-				this.state.componentToRender =  EmailTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  EmailTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "Id":
-				this.state.componentToRender =  IdTd
-				this.state.elementData = props.columnData.document['_id']
+				componentToRender =  IdTd
+				elementData = props.columnData.document['_id']
 				break;
 
 			case "EncryptedText":
-				this.state.componentToRender =  PasswordTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  PasswordTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "DateTime":
-				this.state.componentToRender =  DateTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  DateTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "Object":
-				this.state.componentToRender =  ObjectTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  ObjectTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "GeoPoint":
-				this.state.componentToRender =  GeoTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  GeoTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "File":
-				this.state.componentToRender =  FileTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  FileTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "List":
-				this.state.componentToRender =  ListTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  ListTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "Relation":
-				this.state.componentToRender =  RelationTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  RelationTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 
 			case "ACL":
-				this.state.componentToRender =  ACLTd
-				this.state.elementData = props.columnData.document[props.columnType.name]
+				componentToRender =  ACLTd
+				elementData = props.columnData.document[props.columnType.name]
 				break;
 			
 			default:
-				this.state.componentToRender =  TextTd
-				this.state.elementData = "a"
+				componentToRender =  TextTd
+				elementData = "a"
 				break;
 		}
-		this.state.elementDataBackup = this.state.elementData
-		this.setState(this.state)
+		let elementDataBackup = elementData
+		this.setState({
+			elementDataBackup:elementDataBackup,
+			elementData:elementData,
+			componentToRender:componentToRender
+		})
 	}
 	updateObject(){
 		this.props.columnData.set(this.props.columnType.name,this.state.elementData)
 		this.props.columnData.save().then((res)=>{
-			this.state.elementDataBackup = res.document[this.props.columnType.name]
-			this.setState(this.state)
+			this.setState({elementDataBackup:res.document[this.props.columnType.name]})
 		},(err)=>{
 			console.log(err)
 			this.fetchObject()
@@ -130,14 +142,11 @@ class GenericTdComponent extends React.Component {
 		// },(err)=>{
 		// 	console.log(err)
 		// })
-		this.state.elementData = this.state.elementDataBackup
-		this.setState(this.state)
+		this.setState({elementData:this.state.elementDataBackup})
 	}
 	updateElement(data){
-		this.state.elementData = data
-		this.setState(this.state)
+		this.setState({elementData:data})
 	}
-
 	render() {
 		return (
            React.createElement(this.state.componentToRender, {
