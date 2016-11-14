@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import Dialog from 'material-ui/Dialog';
 
 import TextList from './listComponents/textList.js'
+import BooleanList from './listComponents/booleanList.js'
+import PasswordList from './listComponents/passwordList.js'
 import ObjectList from './listComponents/objectList.js'
 import GeoList from './listComponents/geoList.js'
 import FileList from './listComponents/fileList.js'
 import NumberList from './listComponents/numberList.js'
 import DateTimeList from './listComponents/dateTimeList.js'
+import RelationList from './listComponents/relationList.js'
 import GenericAddToList from './listComponents/genericAddToList.js'
 
 class ListTdComponent extends React.Component {
@@ -30,6 +33,12 @@ class ListTdComponent extends React.Component {
 			case "Text":
 				this.state.elementToRender =  TextList
 				break;
+			case "EncryptedText":
+				this.state.elementToRender =  PasswordList
+				break;
+			case "Boolean":
+				this.state.elementToRender =  BooleanList
+				break;
 			case "Email":
 				this.state.elementToRender =  TextList
 				break;
@@ -51,9 +60,8 @@ class ListTdComponent extends React.Component {
 			case "GeoPoint":
 				this.state.elementToRender =  GeoList
 				break;
-
 			default:
-				this.state.elementToRender =  TextList
+				this.state.elementToRender =  RelationList
 				break;
 		}
 		this.state.elementData = props.elementData
@@ -100,7 +108,8 @@ class ListTdComponent extends React.Component {
 					       	data:data,
 					       	addToElementData:this.addToElementData.bind(this),
 					       	removeFromElementData:this.removeFromElementData.bind(this),
-					       	updateElementData:this.updateElementData.bind(this)
+					       	updateElementData:this.updateElementData.bind(this),
+					       	columnType:this.props.columnType.relatedTo
 			           })
 			})
 		}
@@ -113,7 +122,9 @@ class ListTdComponent extends React.Component {
             			addToElementData={ this.addToElementData.bind(this) }
             			columnType={ this.props.columnType.relatedTo }
             		/>
+            		<div className="listdivscontent">
 	          		{ elements }
+	          		</div>
 	          		<div className="savecanclist">
 	          			<button className="btn btn-danger fr ml5" onClick={this.openCloseModal.bind(this,false,false)}>CLOSE</button>
 	          			<button className="btn btn-primary fr" onClick={this.openCloseModal.bind(this,false,true)}>SAVE</button>

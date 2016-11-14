@@ -4,6 +4,9 @@ import configObject from '../../config/app.js'
 
 //components
 import TextTd from './td/textTdComponent'
+import NumberTd from './td/numberTdComponent'
+import URLTd from './td/urlTdComponent'
+import BooleanTd from './td/booleanTdComponent'
 import DateTd from './td/dateTdComponent'
 import IdTd from './td/idTdComponent'
 import PasswordTd from './td/passwordTdComponent'
@@ -35,6 +38,21 @@ class GenericTdComponent extends React.Component {
 		switch (props.columnType.dataType) {
 			case "Text":
 				this.state.componentToRender =  TextTd
+				this.state.elementData = props.columnData.document[props.columnType.name]
+				break;
+
+			case "Number":
+				this.state.componentToRender =  NumberTd
+				this.state.elementData = props.columnData.document[props.columnType.name]
+				break;
+
+			case "URL":
+				this.state.componentToRender =  URLTd
+				this.state.elementData = props.columnData.document[props.columnType.name]
+				break;
+
+			case "Boolean":
+				this.state.componentToRender =  BooleanTd
 				this.state.elementData = props.columnData.document[props.columnType.name]
 				break;
 
