@@ -25,7 +25,7 @@ class EmailTdComponent extends React.Component {
 		this.setState(this.state)
 	}
 	blurHandler(){
-		let x = this.props.elementData
+		let x = this.props.elementData || ''
 	    let atpos = x.indexOf("@")
 	    let dotpos = x.lastIndexOf(".")
 	    if ((atpos < 1 || dotpos<atpos+2 || dotpos+2>=x.length) && x != '' && x != null && x.length) {

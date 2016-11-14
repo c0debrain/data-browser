@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Dialog from 'material-ui/Dialog';
+import Badge from 'material-ui/Badge';
 
 import TextList from './listComponents/textList.js'
 import BooleanList from './listComponents/booleanList.js'
@@ -115,7 +116,16 @@ class ListTdComponent extends React.Component {
 		}
 		return (
             <td className='mdl-data-table__cell--non-numeric pointer'>
-            	<span className="color888">List</span>
+            	<span className="color888">
+	            	<Badge
+				      badgeContent={ this.state.elementData ? this.state.elementData.length : 0 }
+				      primary={ this.state.elementData ? !!this.state.elementData.length : false }
+				      secondary={ this.state.elementData ? ( this.state.elementData.length == 0 ) : true }
+				      className={ 'badgelistcount' }
+				    ></Badge>
+				    <span className="entriesbadgeright"> - Entries </span>
+			    </span>
+			{ /* <span className="color888">List - { this.state.elementData ? this.state.elementData.length : 0 } - Entries</span> */ }
             	<i className="fa fa-expand fr" aria-hidden="true" onClick={this.openCloseModal.bind(this,true,false)}></i>
             	<Dialog title="LIST EDITOR" modal={false} open={this.state.isModalOpen} onRequestClose={this.handleClose.bind(this)} titleClassName="modaltitle">
             		<GenericAddToList
