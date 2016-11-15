@@ -17,6 +17,9 @@ class Table extends React.Component {
 
 		}
 	}
+	componentWillMount(){
+		this.props.tableStore.showLoader()
+	}
 	componentDidMount(){
 		$(window).scroll(function() {
 		   if($(window).scrollTop() + $(window).height() == $(document).height()) {
@@ -27,6 +30,11 @@ class Table extends React.Component {
 		   		},2000)
 		   }
 		}.bind(this))
+	}
+	componentDidUpdate(){
+		setTimeout(()=>{
+			this.props.tableStore.hideLoader()
+		},2000)
 	}
 	addRow(){
 		var row = new CB.CloudObject(this.props.tableStore.TABLE)
@@ -100,7 +108,7 @@ class Table extends React.Component {
 
 		return (
 			<div id="datatable">
-				<table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp margintop10">
+				<table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp margintop10 hide" id="table">
 			        <thead>
 			         	<GenericTh tableStore={ this.props.tableStore } selectDeselectAllRows={ this.selectDeselectAllRows.bind(this) }/>
 			        </thead>
@@ -112,7 +120,7 @@ class Table extends React.Component {
 			        </tbody>
 			    </table>
 
-			    <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp margintop10 secondayoverlap">
+			    <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp margintop10 secondayoverlap hide" id="tableoverlap">
 			    	<thead>
 			         	<tr>
 							<th className="tdtrcheck"> <Checkbox className="mlm11" onCheck={ this.selectDeselectAllRows.bind(this) }/> </th>
@@ -129,7 +137,9 @@ class Table extends React.Component {
 						</tr>
 			        </tbody>
 			    </table>
-
+				<div id="loader">
+					<div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+				</div>
 		    </div>
 		);
 	}

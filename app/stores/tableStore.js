@@ -172,6 +172,16 @@ class TableStore {
 			this.rowsToDelete = []
 		})
 	}
+	showLoader(){
+		$('#table').addClass('hide')
+		$('#tableoverlap').addClass('hide')
+		$('#loader').removeClass('hide')
+	}
+	hideLoader(){
+		$('#table').removeClass('hide')
+		$('#tableoverlap').removeClass('hide')
+		$('#loader').addClass('hide')
+	}
 
 }
 

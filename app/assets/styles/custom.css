@@ -927,3 +927,26 @@ box-shadow: 2px 0px 5px -2px rgba(0,0,0,0.75);
     height: 9px !important;
     margin-top: 12px !important;
 }
+.pprogresslineaer{
+        font-size: 20px;
+    margin-top: 20px;
+    color: #312D2D;
+    float: left;
+}
+.pprogresslineaer99{
+        font-size: 20px;
+    float: right;
+    color: #0D5186;
+    font-weight: bold;
+}
+#loader{
+    position: absolute;
+    left: 48%;
+    top: 50%;
+}
+.mdl-spinner {
+    display: inline-block;
+    position: relative;
+    width: 40px !important;
+    height: 40px !important;
+}

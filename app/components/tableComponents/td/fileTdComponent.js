@@ -82,6 +82,8 @@ class FileTdComponent extends React.Component {
 		              <div>Try dropping some files here, or click to select files to upload.</div>
 		            </Dropzone>
 		            <img className={ this.state.progress ? "hide" : "previewImage"} src={this.state.file.preview || ''} />
+		            <p className={ !this.state.progress ? "hide" : "pprogresslineaer"}>Please wait while we upload your file.</p>
+		            <p className={ !this.state.progress ? "hide" : "pprogresslineaer99"}>( { this.state.completed == 100 ? 99 : Math.floor(this.state.completed) }% )</p>
 		            <LinearProgress mode="determinate" value={this.state.completed} className={ !this.state.progress ? "hide" : "linaerprogfile"}/>
 		            <button className="btn btn-primary fr ml5 clearboth mt10" onClick={this.fileSave.bind(this)} disabled={ this.state.progress }>SUBMIT</button>
 	          		<button className="btn btn-danger fr mt10" onClick={this.cancelFileSave.bind(this)} disabled={ this.state.progress }>CLOSE</button>

@@ -25,6 +25,7 @@ class Header extends React.Component {
 		this.props.tableStore.search(searchString).then((res)=>{
 			if(res.length){
 				this.props.tableStore.updateColumnsData(res)
+				this.props.tableStore.showLoader()
 			}
 		},(err)=>{
 			this.setState({
@@ -39,6 +40,7 @@ class Header extends React.Component {
 	}
 	refreshRows(){
 		this.props.tableStore.setColumnsData()
+		this.props.tableStore.showLoader()
 	}
 	deleteRows(){
 		this.props.tableStore.deleteRows()
