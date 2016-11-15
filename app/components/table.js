@@ -17,8 +17,16 @@ class Table extends React.Component {
 
 		}
 	}
-	componentWillMount(){
-		
+	componentDidMount(){
+		$(window).scroll(function() {
+		   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		   		setTimeout(()=>{
+		   			if($(window).scrollTop() + $(window).height() == $(document).height()){
+		   				this.props.tableStore.showNextRecords(10)
+		   			}
+		   		},2000)
+		   }
+		}.bind(this))
 	}
 	addRow(){
 		var row = new CB.CloudObject(this.props.tableStore.TABLE)

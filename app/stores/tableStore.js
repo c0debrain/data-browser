@@ -7,6 +7,7 @@ class TableStore {
 	@observable columnsData = []
 	@observable hiddenColumns = []
 	@observable rowsToDelete = []
+	@observable recordsToShow = 20
 
 	@computed get getColumns(){
 		if(this.columns.document){
@@ -31,12 +32,14 @@ class TableStore {
 				this.TABLE = tableName
 			}
 			this.tables = data
+			this.recordsToShow = 20
 			this.setColumns()
 			this.setColumnsData()
 		})
 	}
 	changeTable(tableName){
 		this.TABLE = tableName
+		this.recordsToShow = 20
 		this.setColumns()
 		this.setColumnsData()
 	}
@@ -96,10 +99,14 @@ class TableStore {
 	}
 	setColumnsData(){
 		let query = new CB.CloudQuery(this.TABLE)
-		query.setLimit(20);
+		query.setLimit(this.recordsToShow)
 		query.find().then((list)=>{
 			this.columnsData = list
 		})
+	}
+	showNextRecords(limit){
+		this.recordsToShow += limit
+		this.setColumnsData()
 	}
 	sortColumnsData(what,columnName){
 		let query = new CB.CloudQuery(this.TABLE)
