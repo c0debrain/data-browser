@@ -106,7 +106,11 @@ class TableStore {
 	}
 	showNextRecords(limit){
 		this.recordsToShow += limit
-		this.setColumnsData()
+		let query = new CB.CloudQuery(this.TABLE)
+		query.setLimit(this.recordsToShow)
+		query.find().then((list)=>{
+			if(this.columnsData.length != list.length) this.columnsData = list
+		})
 	}
 	sortColumnsData(what,columnName){
 		let query = new CB.CloudQuery(this.TABLE)
