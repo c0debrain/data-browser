@@ -112,21 +112,12 @@ class TableStore {
 
 	search(searchString){
 		let query = new CB.CloudQuery(this.TABLE)
-		query.search('username',searchString)
-		query.find().then((list)=>{
-			console.log(list)
-		},(err)=>{
-			console.log(err)
-		})
+		if (searchString) query.search(searchString)
+		return query.find()
 	}
 
-	updateColumnsData(id,data){
-		this.columnsData = this.columnsData.map((x)=>{
-			if(x.id == id){
-				x = data
-			}
-			return x
-		})
+	updateColumnsData(data){
+		this.columnsData = data
 	}
 
 	addRow(data){
