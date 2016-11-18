@@ -34,7 +34,7 @@ class Table extends React.Component {
 	componentDidUpdate(){
 		setTimeout(()=>{
 			this.props.tableStore.hideLoader()
-		},2000)
+		},1000)
 	}
 	addRow(){
 		var row = new CB.CloudObject(this.props.tableStore.TABLE)
