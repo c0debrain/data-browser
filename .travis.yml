@@ -13,8 +13,8 @@ node_js:
 before_install:
 - npm install
 install:
-- docker build -t cloudboost/data_browser:2.0.$TRAVIS_BUILD_NUMBER .
-- docker build -t cloudboost/data_browser:latest .
+- docker build -t cloudboost/data-browser:2.0.$TRAVIS_BUILD_NUMBER .
+- docker build -t cloudboost/data-browser:latest .
 after_success:
 #Deploy. 
 #Docker Login
@@ -36,4 +36,4 @@ after_success:
 - gcloud components install kubectl
 - gcloud container clusters get-credentials $GOOGLECLUSTERNAME --zone $GOOGLEZONE --project $GOOGLEPROJECT
 #Push docker images.
-- docker push cloudboost/data_browser:latest
+- docker push cloudboost/data-browser:latest
